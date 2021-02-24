@@ -1,0 +1,557 @@
+html,
+body {
+    width: 100%;
+    margin: 0;
+    font-size: 14pt;
+    min-height: 100%;
+}
+body {
+    /*width: 60%;*/
+    /*margin: auto;*/
+    /* background-image: radial-gradient(#333333, #666666, #333333);*/
+    background-image: url("../images/bottomrleftdesign.png"),
+        url("../images/toprightdesign.png"),
+        url("../images/logotranslucentgray.png"), url("../images/background.png");
+    background-position: left bottom, right top, 95% 5%, center top;
+    background-size: 35%, 35%, 15%, cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin-top: -30px;
+}
+/* @media only screen and (max-width: 600px) { */
+@media only screen and (max-width: 800px) {
+    body {
+        /* width: 90%; */
+        background-size: 80%, 80%, 35%, cover;
+    }
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.justify-content-start {
+    -ms-flex-pack: start !important;
+    justify-content: flex-start !important;
+}
+
+.justify-content-end {
+    -ms-flex-pack: end !important;
+    justify-content: flex-end !important;
+}
+
+.justify-content-center {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
+
+.justify-content-between {
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+}
+
+.justify-content-around {
+    -ms-flex-pack: distribute !important;
+    justify-content: space-around !important;
+}
+
+.gutter {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+@media only screen and (max-width: 800px) {
+    .gutter {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+.margin-top {
+    margin-top: 6%;
+}
+/*
+@media only screen and (max-width: 800px) {
+.margin-top {
+  margin-top:3%;
+}
+}
+*/
+
+.logobackground {
+    background-image: url("../images/logoColor.png");
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: left top;
+    padding: 50px 50px 0 50px;
+}
+@media only screen and (max-width: 800px) {
+    .logobackground {
+        background-image: none;
+        padding: 0;
+    }
+}
+
+@font-face {
+    font-family: "Sloan";
+    src: url("../font/Sloan.ttf") format("truetype");
+}
+@font-face {
+    font-family: "GOTHIC";
+    src: url("Font/GOTHIC.TTF") format("truetype");
+}
+@font-face {
+    font-family: "GOTHICB";
+    src: url("Font/GOTHICB.TTF") format("truetype");
+}
+
+button:focus {
+    outline: none;
+}
+button:active {
+    /* background-color: #33383f; */
+    transform: translateY(4px);
+}
+
+.modeHolder {
+    /* margin: auto;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+align-content: center;
+align-items: stretch;*/
+    /*text-align:center;*/
+    background-image: linear-gradient(to top, #333, #666);
+    border-radius: 15px;
+    /* margin: 0 90px 0 90px; */
+    width: 100%;
+}
+.phorModeHolder {
+    background-image: linear-gradient(to top, #333, #666);
+    border-radius: 15px;
+    min-width: 100%;
+}
+
+.phorButton {
+    height: 40px;
+    width: 100px;
+    background-image: linear-gradient(to top, #bfbfbf, #fff);
+    font-weight: bold;
+    color: #8e0202;
+    /* float: left; */
+    margin: 5px 7px 15px 7px; /*15px 7px 0 7px;*/
+    border: none;
+    border-radius: 5px;
+    /* font-family: 'GOTHIC'; */
+}
+
+.phorEyeActive {
+    height: 40px;
+    width: 100px;
+    color: white;
+    /* float: left; */
+    margin: 5px 7px 15px 7px;
+    border: none;
+    border-radius: 5px;
+    background-image: linear-gradient(to right, #022140, #140289);
+}
+
+@media only screen and (max-width: 800px) {
+    .modeHolder {
+        margin: 0;
+    }
+}
+
+.modeButton {
+    height: 40px;
+    width: 100px;
+    background-image: linear-gradient(to top, #bfbfbf, #fff);
+    font-weight: bold;
+    color: #8e0202;
+    /* float: left; */
+    margin: 5px 7px 15px 7px; /*15px 7px 0 7px;*/
+    border: none;
+    border-radius: 5px;
+    /* font-family: 'GOTHIC'; */
+}
+
+.duochrome {
+    height: 40px;
+    width: 100px;
+    background-image: linear-gradient(to right, #022140, #140289);
+    color: white;
+    /* float: left; */
+    margin: 5px 7px 15px 7px;
+    border: none;
+    border-radius: 5px;
+}
+
+.lineButtonActive {
+    height: 40px;
+    width: 100px;
+    background-image: linear-gradient(to right, #022140, #140289);
+    color: white;
+    /* float: left; */
+    margin: 5px 7px 15px 7px;
+    border: none;
+    border-radius: 5px;
+}
+.modeButtonActive {
+    height: 40px;
+    width: 100px;
+    /*background-image: linear-gradient(to right, #022140 , #140289);*/
+    color: white;
+    /* float: left; */
+    margin: 5px 7px 15px 7px;
+    border-bottom: 5px solid #810815; /* #8E0202 */
+    border-collapse: separate;
+    border-radius: 5px;
+    background-image: none;
+    background-color: #1d2057;
+    /* box-shadow: inset 0px -5px 0px 0px #810815;*/
+}
+
+.lineHolder {
+    width: 100%;
+    /* margin-top: 20px; */
+    margin: 20px 0;
+    border-radius: 10px;
+    /* background-color: #474B4F; */
+    background-image: url("../images/logotranslucent.png"),
+        linear-gradient(to top, #666, #808080);
+    background-position: right bottom, center top;
+    background-size: 10%, cover;
+    background-repeat: no-repeat;
+    min-height: 150px;
+    text-align: center;
+    /*display: table;*/
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+@media only screen and (max-width: 800px) {
+    .lineHolder {
+        background-size: 15%, cover;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .modeButton {
+        width: 80px;
+    }
+    body {
+        margin-top: opx;
+    }
+    .gutter {
+        margin-top: 12%;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .modeButton {
+        width: 100px;
+    }
+    body {
+        margin-top: opx;
+    }
+    .gutter {
+        margin-top: 15%;
+    }
+}
+
+.lineContent {
+    line-height: 40px;
+    /*display: table-cell;
+vertical-align: middle;*/
+    align-self: center;
+}
+
+.lineContent img {
+    height: 30px;
+    margin: 0 10px;
+    filter: contrast(150%);
+}
+
+/* .modeButtonRed
+{
+background-color:#810815;
+background-image:none;
+color:#fff;
+} */
+
+.singleFilter {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.singleFilterActive {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #022140, #140289);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+.retinoscopy {
+    top: 60px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.retinoscopyActive {
+    top: 60px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #022140, #140289);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.colorPlates {
+    top: 60px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.colorPlatesActive {
+    top: 110px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #022140, #140289);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+#refresh {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#movie {
+    top: 60px;
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.text {
+    font-family: "Sloan";
+    font-size: 0.8em;
+    line-height: 30px;
+}
+
+.text2 {
+    font-family: "Sloan";
+    font-size: 2em;
+    line-height: 30px;
+    letter-spacing: 0.6em;
+}
+
+#instructions {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    background: rgba(252, 252, 252, 1);
+    z-index: 10;
+    line-height: 20px;
+    overflow: scroll;
+}
+
+.dropbtn {
+    background-image: linear-gradient(to right, #022140, #140289);
+    color: white;
+    padding: 6px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    /* top: 35px; */
+    left: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    z-index: 1;
+}
+
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.newRow p,
+small {
+    display: inline;
+}
+
+small {
+    font-size: 0.9em;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#colorHolder {
+    display: none;
+}
+
+.soloLine {
+    padding-left: 5px;
+    padding-right: 3px;
+    cursor: pointer;
+}
+
+.col-6 {
+    width: 50%;
+    float: left;
+}
+
+.ref-data {
+    border: 1px solid white;
+    float: left;
+    height: 130px;
+    margin: 10px;
+    width: 30%;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.ref-data-active {
+    border: 1px solid white;
+    float: left;
+    background-image: linear-gradient(to right, #022140, #140289);
+    height: 130px;
+    margin: 10px;
+    width: 30%;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#plano_button {
+    top: 60px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.cross-cylinder-select {
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+}
+
+.jcc {
+    height: 100%;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+}
+
+#jccOD {
+    visibility: hidden;
+    width: 81%;
+}
+
+#jccOS {
+    visibility: hidden;
+    width: 81%;
+}
+
+#jccODText {
+    margin-bottom: 30px;
+    color: white;
+    font-size: 16pt;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#jccOSText {
+    margin-bottom: 30px;
+    color: white;
+    font-size: 16pt;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.jccHolder {
+    background-image: url("../images/protractor.png");
+    background-size: 100% 100%;
+    height: 200px;
+    width: 200px;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}

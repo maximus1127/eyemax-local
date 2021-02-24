@@ -1,0 +1,6 @@
+
+
+
+Delete xml once uploaded
+
+change all sockets to listen to api channel, not location channel

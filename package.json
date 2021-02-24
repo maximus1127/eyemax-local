@@ -1,0 +1,38 @@
+{
+  "name": "EyeMax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64  --prune=true --out=release-builds",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32  --prune=false --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Zoom MonitorAlyzer\"",
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64  --prune=true --out=release-builds"
+  },
+  "keywords": [],
+  "author": "Max Bourque",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^11.1.1",
+    "electron-packager": "^15.2.0",
+    "electron-rebuild": "^2.3.4",
+    "ftp-deploy": "^2.4.0",
+    "serialport": "^9.0.4"
+  },
+  "dependencies": {
+    "any-ascii": "^0.1.7",
+    "buffer-xor": "^2.0.2",
+    "electron": "^11.1.1",
+    "electron-store": "^6.0.1",
+    "ftp-deploy": "^2.4.0",
+    "hex2ascii": "0.0.3",
+    "jquery": "^3.5.1",
+    "moment": "^2.29.1",
+    "numeral": "^2.0.6",
+    "pusher-js": "^7.0.2",
+    "serialport": "^9.0.4",
+    "xml2js": "^0.4.23",
+    "xmlbuilder": "^15.1.1"
+  }
+}

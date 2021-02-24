@@ -1,0 +1,387 @@
+<html>
+
+<head>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <style>
+    tr {
+      cursor: pointer;
+      border-bottom: 1px solid gray;
+      height: 50px;
+
+    }
+
+    /* input{
+      max-width: 60%;
+    } */
+
+    #settings {
+      display: none;
+    }
+
+    #settingsButton {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+    }
+
+    .form-control {
+      max-width: 60%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+
+        <div class="card">
+          <div class="card-header">Dashboard</div>
+
+          <div class="card-body">
+            <a href="./pages/controller.html"><button class="btn btn-success">Start Exam</button></a>
+            <!--  patient information  -->
+            <div>
+              <label>Patient Information</label>
+              <br />
+              <div class="row">
+                <div class="col-3">
+                  <button class="btn btn-danger" onclick="ptModal()" id="pat-button">Select</button>
+                </div>
+                <div class="col-9">
+                  <p id="ptInfo">No Data Selected</p>
+                  <input type="hidden" id="encounter_number" />
+                </div>
+              </div>
+            </div>
+            <!--  end patient information  -->
+            <hr />
+            <!--  auto refractor  -->
+            <div>
+              <label>Autorefractor</label>
+              <br />
+              <div class="row">
+                <div class="col-3">
+                  <button class="btn btn-danger" id="ar-button" onclick="autorefractorModal()">Select</button>
+                </div>
+                <div class="col-9">
+                  <p id="arInfo">No Data Selected</p>
+                </div>
+              </div>
+            </div>
+            <!--  end autorefractor  -->
+            <hr />
+            <!--  lensometer  -->
+            <div>
+              <label>Lensometer</label>
+              <br />
+              <div class="row">
+                <div class="col-3">
+                  <button class="btn btn-danger" id="lm-button" onclick="autolensometerModal()">Select</button>
+                </div>
+                <div class="col-9">
+                  <p id="lmInfo">No Data Selected</p>
+                </div>
+              </div>
+            </div>
+            <!--  end lensometer  -->
+            <hr />
+            <!--  keratometer  -->
+            <div>
+              <label>Keratometer</label>
+              <br />
+              <div class="row">
+                <div class="col-3">
+                  <button class="btn btn-danger" id="km-button" onclick="autokeratometerModal()">Select</button>
+                </div>
+                <div class="col-9">
+                  <p id="kmInfo">No Data Selected</p>
+                </div>
+              </div>
+            </div>
+            <!--  end keratometer  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- modals -->
+  <section>
+    <div class="modal fade" id="ptInfoModal" tabindex="-1" role="dialog" aria-labelledby="ptInfoModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ptInfoModalLabel">Pt Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table style="width: 100%">
+              <thead>
+                <th>Pt Name</th>
+                <th>Encounter Id</th>
+              </thead>
+              <tbody id="ptInfoBody">
+
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="enterManualPt()">Type Encounter Number</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  end patient info modal
+
+   auto refractor modal  -->
+    <div class="modal fade" id="autorefractorModal" tabindex="-1" role="dialog" aria-labelledby="autorefractorModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="autorefractorModalLabel">AutoRefractor</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table style="width: 100%">
+              <thead>
+                <th>Timestamp</th>
+                <th>Readings</th>
+              </thead>
+              <tbody id="autorefractorBody">
+
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="enterManualAr()">Type Entry</button>
+            <button type="button" class="btn btn-primary" onclick="acceptManualAr()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  end auto refractor modal
+
+
+   auto lensometer modal  -->
+    <div class="modal fade" id="autolensometerModal" tabindex="-1" role="dialog" aria-labelledby="autolensometerModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="autolensometerModalLabel">Autolensometer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table style="width: 100%">
+              <thead>
+                <th>Timestamp</th>
+                <th>Readings</th>
+              </thead>
+              <tbody id="autolensometerBody">
+
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="enterManualLm()">Type Entry</button>
+            <button type="button" class="btn btn-primary" onclick="acceptManualLm()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  end auto lensometer modal
+
+   auto keratometer modal  -->
+    <div class="modal fade" id="autokeratometerModal" tabindex="-1" role="dialog" aria-labelledby="autokeratometerModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="autokeratometerModalLabel">Autokeratometer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table style="width: 100%">
+              <thead>
+                <th>Timestamp</th>
+                <th>Readings</th>
+              </thead>
+              <tbody id="autokeratometerBody">
+
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="enterManualKm()">Type Entry</button>
+            <button type="button" class="btn btn-primary" onclick="acceptManualKm()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  end keratometer modal  -->
+
+
+
+  </section>
+
+  <section>
+    <div id="settingsButton">
+      <button onClick="toggleSettings()" id="theButton">Settings</button>
+      <input id="password" type="password" />
+    </div>
+
+    <div id="settings">
+      <div class="form-group row">
+        <label for="emr_export">Export Completed Refraction Info To (path):</label>
+        <input class="form-control" id="emr_export" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="emr_import">Listen For New Patient Intakes In (path):</label>
+        <input class="form-control" id="emr_import" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="store_id">Store ID</label>
+        <input class="form-control" id="store_id" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="lm_model">LM Model</label>
+        <input class="form-control" id="lm_model" placeholder="All Lowercase/No Special Chars (ie: vx120/vx36/etc)" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="phor_model">Phoropter Model</label>
+        <input class="form-control" id="phor_model" placeholder="All Lowercase/No Special Chars (ie: vx120/vx36/etc)" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="ar_model">AR Model</label>
+        <input class="form-control" id="ar_model" placeholder="All Lowercase/No Special Chars (ie: vx120/vx36/etc)" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="xml_path">XML Files Go To (path):</label>
+        <input class="form-control" id="xml_path" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="phor_com">Phoropter COM#:</label>
+        <input class="form-control" id="phor_com" placeholder="Com;baudRate;dataBits;stopBits;parity" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="lm_com">Lensometer COM#:</label>
+        <input class="form-control" id="lm_com" placeholder="Com;baudRate;dataBits;stopBits;parity" />
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="ar_com">Autorefractor COM#:</label>
+        <input class="form-control" id="ar_com" placeholder="Com;baudRate;dataBits;stopBits;parity" />
+      </div>
+      <br />
+
+    </div>
+
+  </section>
+  <script>
+    window.$ = window.jQuery = require('jquery');
+    var Store = require('electron-store');
+    var store = new Store();
+    const fs = require('fs');
+    const path = require('path');
+    const ipc = require('electron').ipcRenderer;
+    const remote = require('electron').remote;
+    const xml2js = require('xml2js');
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="./js/modal_functions.js"></script>
+
+  <script>
+    function toggleSettings() {
+      if (document.getElementById('password').value == "aqt") {
+        if (window.getComputedStyle(document.getElementById('settings'), null).display == "none") {
+          document.getElementById('settings').style.display = "block";
+          if (store.get('emr_export')) {
+            document.getElementById('emr_export').value = store.get('emr_export');
+          }
+          if (store.get('emr_import')) {
+            document.getElementById('emr_import').value = store.get('emr_import');
+          }
+          if (store.get('store_id')) {
+            document.getElementById('store_id').value = store.get('store_id');
+          }
+          if (store.get('lm_model')) {
+            document.getElementById('lm_model').value = store.get('lm_model');
+          }
+          if (store.get('ar_model')) {
+            document.getElementById('ar_model').value = store.get('ar_model');
+          }
+          if (store.get('phor_model')) {
+            document.getElementById('phor_model').value = store.get('phor_model');
+          }
+          if (store.get('xml_path')) {
+            document.getElementById('xml_path').value = store.get('xml_path');
+          }
+          if (store.get('phor_com')) {
+            document.getElementById('phor_com').value = store.get('phor_com');
+          }
+          if (store.get('lm_com')) {
+            document.getElementById('lm_com').value = store.get('lm_com');
+          }
+          if (store.get('ar_com')) {
+            document.getElementById('ar_com').value = store.get('ar_com');
+          }
+          document.getElementById('theButton').innerHTML = "Save"
+        } else {
+          document.getElementById('settings').style.display = "none";
+
+          document.getElementById('theButton').innerHTML = "Settings"
+          saveValues();
+          document.getElementById('password').value = ""
+        }
+      }
+    }
+
+    function saveValues() {
+      store.set('emr_export', document.getElementById('emr_export').value);
+      store.set('emr_import', document.getElementById('emr_import').value);
+      store.set('store_id', document.getElementById('store_id').value);
+      store.set('lm_model', document.getElementById('lm_model').value);
+      store.set('phor_model', document.getElementById('phor_model').value);
+      store.set('ar_model', document.getElementById('ar_model').value);
+      store.set('xml_path', document.getElementById('xml_path').value);
+      store.set('phor_com', document.getElementById('phor_com').value);
+      store.set('lm_com', document.getElementById('lm_com').value);
+      store.set('ar_com', document.getElementById('ar_com').value);
+    }
+
+
+    // $(document).ready(function(){
+    //   win2 = window.open('va.html');
+    // })
+    function getGlobalPeripheral() {
+      ipc.send('getGlobalPeripheral')
+    }
+    ipc.on('globalRequestResponse', (d, data) => {
+      console.log(data)
+    })
+
+    
+  </script>
+</body>
+
+</html>
