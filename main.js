@@ -67,8 +67,9 @@ app.once("ready", ev => {
 
 
   config.win.on("close", ev => {
-    ev.sender.hide();
-    ev.preventDefault();
+    // ev.sender.hide();
+    // ev.preventDefault();
+    app.quit()
   });
 
   config.tray = new Tray(path.join(__dirname, 'asset', 'img', 'spongebob.png'));
@@ -106,7 +107,7 @@ app.once("ready", ev => {
 
 
 
-  splitUrl = store.get('api_address').split('/')
+  // splitUrl = store.get('api_address').split('/')
 
   // https.request(
   //     {
@@ -153,9 +154,9 @@ app.once("ready", ev => {
       phorSplit = phorcom.split(';')
       phoropter = new SerialPort(phorSplit[0], {
         autoOpen: true,
-        baudRate: phorSplit[1],
-        dataBits: phorSplit[2],
-        stopBits: phorSplit[3],
+        baudRate: parseInt(phorSplit[1]),
+        dataBits: parseInt(phorSplit[2]),
+        stopBits: parseInt(phorSplit[3]),
         parity: phorSplit[4]
       })
     } else {
