@@ -31,10 +31,10 @@ function ptModal() {
   $(".ptrows").remove();
   var files = fs.readdirSync(store.get('emr_import'));
   if (files.length > 0) {
-    $(files).each(function(file) {
+    $(files).each(function (file) {
       // console.log(!path.basename(store.get('emr_import') + '/' + files[file]).includes('complete'))
       if (!path.basename(store.get('emr_import') + '/' + files[file]).includes('complete') == true) {
-        fs.readFile(store.get('emr_import') + '/' + files[file], function(err, data) {
+        fs.readFile(store.get('emr_import') + '/' + files[file], function (err, data) {
           dataSplit = data.toString().split('\n')
           available_encounters[file] = {}
           available_encounters[file].pt_name = dataSplit[2].split('|')[2].replace('^', ', ')
@@ -78,7 +78,7 @@ function enterManualPt() {
       pt_id: pt,
       pt_name: ""
     },
-    success: function() {
+    success: function () {
       $("#ptInfo").html(`${pt}`);
       $("#encounter_number").val(`${pt}`);
       $("#pat-button").removeClass("btn-danger");
@@ -125,11 +125,11 @@ function autorefractorModal() {
   var parser = new xml2js.Parser();
   var files = fs.readdirSync(store.get('xml_path') + '\\new');
   if (files.length > 0) {
-    $(files).each(function(file) {
+    $(files).each(function (file) {
 
       if (path.basename(store.get('xml_path') + '/new/' + files[file]).includes('ar')) {
-        fs.readFile(store.get('xml_path') + '/new/' + files[file], function(err, data) {
-          parser.parseString(data, function(err, result) {
+        fs.readFile(store.get('xml_path') + '/new/' + files[file], function (err, data) {
+          parser.parseString(data, function (err, result) {
             // console.log(result)
             available_ars[file] = {}
             odlm = result["MarcoData-XML"]['DataSet'][0]["Presenting_Data_OD"][0] ?? null
@@ -262,6 +262,8 @@ function selectAr(ar) {
 
     $("#km-button").removeClass("btn-danger");
     $("#km-button").addClass("btn-success");
+  }
+    if(ar != "man"){
     fs.rename(store.get('xml_path') + '/new/' + e.filename, store.get('xml_path') + '/' + e.filename, () => {
       ipc.send('updateAR', available_ars[ar]);
       $("#autorefractorModal").modal("hide");
@@ -311,12 +313,12 @@ function acceptManualAr() {
     ar04: $("#manual_ar_axis_od").val(),
     ar05: $("#manual_ar_sphere_os").val(),
     ar06: $("#manual_ar_cyl_os").val(),
-    ar07: $("#manual_ar_axis_os").val(),
-    id: $("#pt_id").html()
+    ar07: $("#manual_ar_axis_os").val()
   };
 
-
+  console.log(available_ars['man'])
   selectAr("man");
+  ipc.send('updateAR', available_ars['man']);
   $("#autorefractorModal").modal("hide");
 }
 
@@ -357,11 +359,11 @@ function autolensometerModal() {
   var files = fs.readdirSync(store.get('xml_path') + '\\new');
   if (files.length > 0) {
 
-    $(files).each(function(file) {
+    $(files).each(function (file) {
 
       if (path.basename(store.get('xml_path') + '/new/' + files[file]).includes('lm')) {
-        fs.readFile(store.get('xml_path') + '/new/' + files[file], function(err, data) {
-          parser.parseString(data, function(err, result) {
+        fs.readFile(store.get('xml_path') + '/new/' + files[file], function (err, data) {
+          parser.parseString(data, function (err, result) {
             od = result["MarcoData-XML"]['DataSet'][0]["Presenting_Data_OD"][0]
             os = result["MarcoData-XML"]['DataSet'][0]["Presenting_Data_OS"][0]
             available_lms[file] = {}

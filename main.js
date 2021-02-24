@@ -424,27 +424,36 @@ ipcMain.on('updateLM', function (event, status) {
   globalPeripheralData.la08 = numeral(status.la08).format('+0.00')
   console.log(globalPeripheralData)
 
+  if ((globalPeripheralData.ar02 === null || globalPeripheralData.ar02 === undefined) || (globalPeripheralData.ar05 === null || globalPeripheralData.ar05 === undefined)){
+    globalPeripheralData.ar02 = numeral(status.ar02).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.ar03 = numeral(status.ar03).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.ar04 = numeral(status.ar04).format('000') ?? numeral("+0.00").format('000')
+    globalPeripheralData.ar05 = numeral(status.ar05).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.ar06 = numeral(status.ar06).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.ar07 = numeral(status.ar07).format('000') ?? numeral("+0.00").format('000')
+  }
 });
 
 
 ipcMain.on('updateAR', function (event, status) {
-  globalPeripheralData.ar02 = numeral(status.ar02).format('+0.00')
-  globalPeripheralData.ar03 = numeral(status.ar03).format('+0.00')
-  globalPeripheralData.ar04 = numeral(status.ar04).format('000')
-  globalPeripheralData.ar05 = numeral(status.ar05).format('+0.00')
-  globalPeripheralData.ar06 = numeral(status.ar06).format('+0.00')
-  globalPeripheralData.ar07 = numeral(status.ar07).format('000')
+  globalPeripheralData.ar02 = numeral(status.ar02).format('+0.00') ?? numeral("+0.00").format('+0.00')
+  globalPeripheralData.ar03 = numeral(status.ar03).format('+0.00') ?? numeral("+0.00").format('+0.00')
+  globalPeripheralData.ar04 = numeral(status.ar04).format('000') ?? numeral("+0.00").format('000')
+  globalPeripheralData.ar05 = numeral(status.ar05).format('+0.00') ?? numeral("+0.00").format('+0.00')
+  globalPeripheralData.ar06 = numeral(status.ar06).format('+0.00') ?? numeral("+0.00").format('+0.00')
+  globalPeripheralData.ar07 = numeral(status.ar07).format('000') ?? numeral("+0.00").format('000')
 
-  if (status.la01 != null || status.la05 != null) {
-    globalPeripheralData.la01 = numeral(status.la01).format('+0.00')
-    globalPeripheralData.la02 = numeral(status.la02).format('+0.00')
-    globalPeripheralData.la03 = numeral(status.la03).format('000')
-    globalPeripheralData.la04 = numeral(status.la04).format('+0.00')
-    globalPeripheralData.la05 = numeral(status.la05).format('+0.00')
-    globalPeripheralData.la06 = numeral(status.la06).format('+0.00')
-    globalPeripheralData.la07 = numeral(status.la07).format('000')
-    globalPeripheralData.la08 = numeral(status.la08).format('+0.00')
-  }
+ if ((globalPeripheralData.la01 === null || globalPeripheralData.la01 === undefined) || (globalPeripheralData.la04 === null || globalPeripheralData.la04 === undefined)) {
+    globalPeripheralData.la01 = numeral(status.la01).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.la02 = numeral(status.la02).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.la03 = numeral(status.la03).format('000') ?? numeral("+0.00").format('000')
+    globalPeripheralData.la04 = numeral(status.la04).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.la05 = numeral(status.la05).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.la06 = numeral(status.la06).format('+0.00') ?? numeral("+0.00").format('+0.00')
+    globalPeripheralData.la07 = numeral(status.la07).format('000') ?? numeral("+0.00").format('000')
+    globalPeripheralData.la08 = numeral(status.la08).format('+0.00') ?? numeral("+0.00").format('+0.00')
+ }
+  
   if (status.ar08 != null || status.ar10 != null) {
     globalPeripheralData.ar08 = status.ar08
     globalPeripheralData.ar09 = status.ar09
