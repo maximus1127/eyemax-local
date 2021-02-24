@@ -88,20 +88,20 @@ app.once("ready", ev => {
     },
   ]);
 
-  config.tray.setToolTip("This is my application.");
-  config.tray.setTitle("ZoomMon"); // macOS only
+  config.tray.setToolTip("");
+  config.tray.setTitle("EyeMax"); // macOS only
   config.tray.setContextMenu(menu);
 
   config.win.on('minimize', e => {
-    config.win.hide()
+    // config.win.hide()
     // scanning();
   })
   config.win.on('hide', e => {
     // config.win.hide()
     // scanning();
   })
-  console.log(app.getPath('userData'))
-  sleep(1000)
+  // console.log(app.getPath('userData'))
+  // sleep(1000)
   // config.win.hide()
   // scanning()
 
@@ -260,9 +260,11 @@ ipcMain.on('phoropterChange', function (event, data) {
 
 finalRX = {}
 ipcMain.on('finalRx', function (event, data) {
-  fs.writeFile(store.get('emr_export') + "/" + 'c-' + store.get('store_id') + "-" + currentPatient + "-" + Date.now() + '.txt', data.join(''), () => {
-    console.log("done")
-  })
+  if (currentPatient != "") {
+    fs.writeFile(store.get('emr_export') + "/" + 'c-' + store.get('store_id') + "-" + currentPatient + "-" + Date.now() + '.txt', data.join(''), () => {
+      console.log("done")
+    })
+  }
   // console.log(data)
   globalPeripheralData = {}
   currentPatient = ""
