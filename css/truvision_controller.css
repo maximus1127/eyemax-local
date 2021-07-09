@@ -18,22 +18,29 @@ body {
     background-attachment: fixed;
     margin-top: -30px;
 }
+button {
+    font-size: 10pt;
+    height: auto;
+}
+.container {
+    width: 90%;
+}
 /* @media only screen and (max-width: 600px) { */
-@media only screen and (max-width: 800px) {
+/* @media only screen and (max-width: 800px) {
     body {
         /* width: 90%; */
-        background-size: 80%, 80%, 35%, cover;
+/* background-size: 80%, 80%, 35%, cover;
     }
-}
+} */
 
-.row {
+/* .row {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-}
+} */
 
-.justify-content-start {
+/* .justify-content-start {
     -ms-flex-pack: start !important;
     justify-content: flex-start !important;
 }
@@ -71,7 +78,7 @@ body {
 
 .margin-top {
     margin-top: 6%;
-}
+} */
 /*
 @media only screen and (max-width: 800px) {
 .margin-top {
@@ -81,11 +88,12 @@ body {
 */
 
 .logobackground {
-    background-image: url("../images/logoColor.png");
+    /* background-image: url("../images/logoColor.png"); */
     background-repeat: no-repeat;
     background-size: 20%;
     background-position: left top;
-    padding: 50px 50px 0 50px;
+    /* padding: 50px 50px 0 50px; */
+    margin: 30px;
 }
 @media only screen and (max-width: 800px) {
     .logobackground {
@@ -115,19 +123,7 @@ button:active {
     transform: translateY(4px);
 }
 
-.modeHolder {
-    /* margin: auto;
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-align-content: center;
-align-items: stretch;*/
-    /*text-align:center;*/
-    background-image: linear-gradient(to top, #333, #666);
-    border-radius: 15px;
-    /* margin: 0 90px 0 90px; */
-    width: 100%;
-}
+
 .phorModeHolder {
     background-image: linear-gradient(to top, #333, #666);
     border-radius: 15px;
@@ -141,7 +137,8 @@ align-items: stretch;*/
     font-weight: bold;
     color: #8e0202;
     /* float: left; */
-    margin: 5px 7px 15px 7px; /*15px 7px 0 7px;*/
+    margin: 10px 7px 15px 7px;
+    /*15px 7px 0 7px;*/
     border: none;
     border-radius: 5px;
     /* font-family: 'GOTHIC'; */
@@ -152,7 +149,7 @@ align-items: stretch;*/
     width: 100px;
     color: white;
     /* float: left; */
-    margin: 5px 7px 15px 7px;
+    margin: 10px 7px 15px 7px;
     border: none;
     border-radius: 5px;
     background-image: linear-gradient(to right, #022140, #140289);
@@ -171,7 +168,8 @@ align-items: stretch;*/
     font-weight: bold;
     color: #8e0202;
     /* float: left; */
-    margin: 5px 7px 15px 7px; /*15px 7px 0 7px;*/
+    margin: 5px 7px 15px 7px;
+    /*15px 7px 0 7px;*/
     border: none;
     border-radius: 5px;
     /* font-family: 'GOTHIC'; */
@@ -205,7 +203,8 @@ align-items: stretch;*/
     color: white;
     /* float: left; */
     margin: 5px 7px 15px 7px;
-    border-bottom: 5px solid #810815; /* #8E0202 */
+    border-bottom: 5px solid #810815;
+    /* #8E0202 */
     border-collapse: separate;
     border-radius: 5px;
     background-image: none;
@@ -214,7 +213,7 @@ align-items: stretch;*/
 }
 
 .lineHolder {
-    width: 100%;
+    /* width: auto; */
     /* margin-top: 20px; */
     margin: 20px 0;
     border-radius: 10px;
@@ -230,6 +229,20 @@ align-items: stretch;*/
     position: relative;
     display: flex;
     justify-content: center;
+}
+
+.modeHolder {
+    /* margin: auto;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+align-content: center;
+align-items: stretch;*/
+    /*text-align:center;*/
+    background-image: linear-gradient(to top, #333, #666);
+    border-radius: 15px;
+    /* margin: 0 90px 0 90px; */
+    /* width: auto; */
 }
 @media only screen and (max-width: 800px) {
     .lineHolder {
@@ -289,6 +302,32 @@ color:#fff;
     border-radius: 5px;
     width: 30px;
     height: 30px;
+}
+
+.activateJcc {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 35px;
+    height: 30px;
+    z-index: 1;
+}
+
+.activatePrism {
+    top: 50px;
+    left: 10px;
+    position: absolute;
+    background-image: linear-gradient(to right, #8e0202, #bf0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 35px;
+    height: 30px;
+    z-index: 1;
 }
 
 .singleFilterActive {
@@ -471,10 +510,10 @@ small {
     cursor: pointer;
 }
 
-.col-6 {
+/* .col-6 {
     width: 50%;
     float: left;
-}
+} */
 
 .ref-data {
     border: 1px solid white;
@@ -526,11 +565,15 @@ small {
 #jccOD {
     visibility: hidden;
     width: 81%;
+    height: 81%;
+    margin: auto;
 }
 
 #jccOS {
     visibility: hidden;
     width: 81%;
+    height: 81%;
+    margin: auto;
 }
 
 #jccODText {
@@ -553,5 +596,12 @@ small {
     width: 200px;
     background-position: center;
     display: flex;
-    align-items: center;
+    margin: auto;
+}
+.fa-minus-square {
+    margin-top: 10px;
+}
+
+.fa-plus-square {
+    margin-top: 10px;
 }

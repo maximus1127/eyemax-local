@@ -39,6 +39,13 @@ if (store.get('ar_com')) {
               'KM_Diopt_R2_OS': numeral(theData[13].slice(18, 23)).format('00.00'),
               'KM_mm_SteepAXIS_OS': numeral(theData[13].slice(23, 26)).format('000')
             },
+              "RM_Data_OU": {
+                "DistVA_OU": " ",
+                "DistVA_OU_Ext": " ",
+                "PHVA_OU": " ",
+                "PHVA_OU_Ext": " ",
+                "PD": numeral(theData[15].slice(0, 2)).format('00'),
+              },
           }
         }
       };
@@ -46,7 +53,7 @@ if (store.get('ar_com')) {
         pretty: true
       });
       console.log(xml);
-      fs.writeFile(store.get('xml_path') + '\\new\\ar.xml', xml, function(err) {
+      fs.writeFile(`${store.get('xml_path')}\\new\\ar${Date.now()}.xml`, xml, function(err) {
         if (err) return console.log(err);
       });
 

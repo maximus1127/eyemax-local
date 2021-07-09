@@ -20,6 +20,7 @@ var builder = require('xmlbuilder');
 const numeral = require('numeral')
 const https = require('https');
 const vx55 = require('./phoropter_functions/vx_send_calc.js')
+var ks = require('node-key-sender');
 // const Buffer = require('buffer');
 // const Buffer = new buffer();
 
@@ -33,7 +34,7 @@ var processAK;
 
 app.once("ready", ev => {
   config.win = new BrowserWindow({
-    width: 1800,
+    width: 1900,
     height: 950,
     center: true,
     minimizable: true,
@@ -145,7 +146,7 @@ app.once("ready", ev => {
     processLensometer(hextoascii, SerialPort, Readline, store, numeral, builder, fs)
   }
 
-  if (arModel = store.get('lm_model')) {
+  if (arModel = store.get('ar_model')) {
     processAK = new Function("hextoascii", "SerialPort", "Readline", "store", "numeral", "builder", "fs", fs.readFileSync(path.join(__dirname, 'peripheral_functions', arModel + '.js')))
     processAK(hextoascii, SerialPort, Readline, store, numeral, builder, fs)
   }
@@ -424,7 +425,7 @@ ipcMain.on('updateLM', function (event, status) {
   globalPeripheralData.la08 = numeral(status.la08).format('+0.00')
   console.log(globalPeripheralData)
 
-  if ((globalPeripheralData.ar02 === null || globalPeripheralData.ar02 === undefined) || (globalPeripheralData.ar05 === null || globalPeripheralData.ar05 === undefined)){
+  if ((globalPeripheralData.ar02 === null || globalPeripheralData.ar02 === undefined) || (globalPeripheralData.ar05 === null || globalPeripheralData.ar05 === undefined)) {
     globalPeripheralData.ar02 = numeral(status.ar02).format('+0.00') ?? numeral("+0.00").format('+0.00')
     globalPeripheralData.ar03 = numeral(status.ar03).format('+0.00') ?? numeral("+0.00").format('+0.00')
     globalPeripheralData.ar04 = numeral(status.ar04).format('000') ?? numeral("+0.00").format('000')
@@ -436,6 +437,7 @@ ipcMain.on('updateLM', function (event, status) {
 
 
 ipcMain.on('updateAR', function (event, status) {
+  globalPeripheralData.ar01 = numeral(status.ar01).format('00') ?? numeral("64").format('00')
   globalPeripheralData.ar02 = numeral(status.ar02).format('+0.00') ?? numeral("+0.00").format('+0.00')
   globalPeripheralData.ar03 = numeral(status.ar03).format('+0.00') ?? numeral("+0.00").format('+0.00')
   globalPeripheralData.ar04 = numeral(status.ar04).format('000') ?? numeral("+0.00").format('000')
@@ -443,7 +445,7 @@ ipcMain.on('updateAR', function (event, status) {
   globalPeripheralData.ar06 = numeral(status.ar06).format('+0.00') ?? numeral("+0.00").format('+0.00')
   globalPeripheralData.ar07 = numeral(status.ar07).format('000') ?? numeral("+0.00").format('000')
 
- if ((globalPeripheralData.la01 === null || globalPeripheralData.la01 === undefined) || (globalPeripheralData.la04 === null || globalPeripheralData.la04 === undefined)) {
+  if ((globalPeripheralData.la01 === null || globalPeripheralData.la01 === undefined) || (globalPeripheralData.la04 === null || globalPeripheralData.la04 === undefined)) {
     globalPeripheralData.la01 = numeral(status.la01).format('+0.00') ?? numeral("+0.00").format('+0.00')
     globalPeripheralData.la02 = numeral(status.la02).format('+0.00') ?? numeral("+0.00").format('+0.00')
     globalPeripheralData.la03 = numeral(status.la03).format('000') ?? numeral("+0.00").format('000')
@@ -452,8 +454,8 @@ ipcMain.on('updateAR', function (event, status) {
     globalPeripheralData.la06 = numeral(status.la06).format('+0.00') ?? numeral("+0.00").format('+0.00')
     globalPeripheralData.la07 = numeral(status.la07).format('000') ?? numeral("+0.00").format('000')
     globalPeripheralData.la08 = numeral(status.la08).format('+0.00') ?? numeral("+0.00").format('+0.00')
- }
-  
+  }
+
   if (status.ar08 != null || status.ar10 != null) {
     globalPeripheralData.ar08 = status.ar08
     globalPeripheralData.ar09 = status.ar09
@@ -483,4 +485,9 @@ ipcMain.on('updateKM', function (event, status) {
 ipcMain.on('getGlobalPeripheral', () => {
   // console.log(status)
   config.win.webContents.send('globalRequestResponse', globalPeripheralData);
+})
+
+ipcMain.on('sendKeyPress', function(event, data){
+  console.log(data)
+  config.win.webContents.sendInputEvent({type : 'keyDown', keyCode : data});
 })

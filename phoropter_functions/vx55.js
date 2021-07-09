@@ -396,6 +396,7 @@ $(document).keydown(function (event) {
     if (event.which == 46) {
       event.preventDefault();
       curEye = "od";
+      addMode = false;
       $("*").removeClass("phorEyeActive");
       $(".odButtons").addClass("phorEyeActive");
       $("#jccOS").css("visibility", "hidden");
@@ -406,11 +407,13 @@ $(document).keydown(function (event) {
       masterMarcoPhoropter([
         [0x01, 0x00, 0x28, 0x01]
       ]);
+      sendFullSet()
       // setTimeout(sendData(["XC0"]), 250);
     }
     if (event.which == 34) {
       event.preventDefault();
       curEye = "os";
+      addMode = false;
       $("*").removeClass("phorEyeActive");
       $(".osButtons").addClass("phorEyeActive");
       $("#jccOD").css("visibility", "hidden");
@@ -423,10 +426,12 @@ $(document).keydown(function (event) {
       masterMarcoPhoropter([
         [0x01, 0x00, 0x28, 0x02]
       ]);
+      sendFullSet()
     }
     if (event.which == 35) {
       event.preventDefault();
       curEye = "ou";
+      addMode = false;
       $("*").removeClass("phorEyeActive");
       $([phorButtons[1], phorButtons[3], phorButtons[5]]).addClass(
         "phorEyeActive"
@@ -439,11 +444,13 @@ $(document).keydown(function (event) {
       masterMarcoPhoropter([
         [0x01, 0x00, 0x28, 0x00]
       ]);
+      sendFullSet()
       // setTimeout(sendData(["XC0"]), 250);
     }
 
     // jcc controls
     if (event.which == 101) {
+      if(addMode == false){
       //5
       //toggle jcc on correct eye
       var jccCurStat = jccStatus == 1 ? "XC1" : (jccCurStat = "XC2");
@@ -562,6 +569,7 @@ $(document).keydown(function (event) {
         }
       }
     }
+    }
 
     if (event.which == 110) {
       addMode = !addMode;
@@ -572,12 +580,18 @@ $(document).keydown(function (event) {
         odAdd = numeral(parseFloat($(phorButtons[12]).html()) + parseFloat($(phorButtons[3]).html())).format("+0.00") * 100;
         osAdd = numeral(parseFloat($(phorButtons[14]).html()) + parseFloat($(phorButtons[5]).html())).format("+0.00") * 100;
         masterMarcoPhoropter([
+          [0x01, 0x00, 0x2B, 0x80]
+        ])
+        masterMarcoPhoropter([
           [0x04, 0x00, 0x40, byteData[odAdd].hb, byteData[odAdd].lb, byteData[osAdd].hb, byteData[osAdd].lb]
         ])
       } else {
         $("#addRow").removeClass("cross-cylinder-select");
         odAdd = numeral(parseFloat($(phorButtons[3]).html())).format('+0.00') * 100;
         osAdd = numeral(parseFloat($(phorButtons[5]).html())).format("+0.00") * 100;
+         masterMarcoPhoropter([
+           [0x01, 0x00, 0x2B, 0x00]
+         ])
         masterMarcoPhoropter([
           [0x04, 0x00, 0x40, byteData[odAdd].hb, byteData[odAdd].lb, byteData[osAdd].hb, byteData[osAdd].lb]
         ])
@@ -793,18 +807,7 @@ function createSubjectiveDataArray() {
       }
     }
   });
-  tempOdSph = numeral($('.phorButton').eq(3).html()).format("+0.00") * 100;
-  tempOsSph = numeral($('.phorButton').eq(5).html()).format("+0.00") * 100;
-  tempOdCyl = numeral($('.phorButton').eq(6).html()).format("+0.00") * 100;
-  tempOsCyl = numeral($('.phorButton').eq(8).html()).format("+0.00") * 100;
-  tempOdAxis = numeral($('.phorButton').eq(9).html()).format("000");
-  tempOsAxis = numeral($('.phorButton').eq(11).html()).format("000");
-  tempOdCyl = numeral($('.phorButton').eq(12).html()).format("+0.00") * 100;
-  tempOsCyl = numeral($('.phorButton').eq(13).html()).format("+0.00") * 100;
-  firstHalfOfFullRX = [0x08, 0x00, 0x40, byteData[tempOdSph].hb, byteData[tempOdSph].lb, byteData[tempOsSph].hb, byteData[tempOsSph].lb, byteData[tempOdCyl].hb, byteData[tempOdCyl].lb, byteData[tempOsCyl].hb, byteData[tempOsCyl].lb]
-  secondHalfOfFullRX = [0x02, 0x00, 0x48, parseInt("0x" + tempOdAxis), parseInt("0x" + tempOsAxis)]
-
-  masterMarcoPhoropter([firstHalfOfFullRX, secondHalfOfFullRX]);
+sendFullSet()
 }
 
 
@@ -825,18 +828,22 @@ function createFinalDataArray() {
       }
     }
   });
-  tempOdSph = numeral($('.phorButton').eq(3).html()).format("+0.00") * 100;
-  tempOsSph = numeral($('.phorButton').eq(5).html()).format("+0.00") * 100;
-  tempOdCyl = numeral($('.phorButton').eq(6).html()).format("+0.00") * 100;
-  tempOsCyl = numeral($('.phorButton').eq(8).html()).format("+0.00") * 100;
-  tempOdAxis = numeral($('.phorButton').eq(9).html()).format("000");
-  tempOsAxis = numeral($('.phorButton').eq(11).html()).format("000");
-  tempOdCyl = numeral($('.phorButton').eq(12).html()).format("+0.00") * 100;
-  tempOsCyl = numeral($('.phorButton').eq(13).html()).format("+0.00") * 100;
-  firstHalfOfFullRX = [0x08, 0x00, 0x40, byteData[tempOdSph].hb, byteData[tempOdSph].lb, byteData[tempOsSph].hb, byteData[tempOsSph].lb, byteData[tempOdCyl].hb, byteData[tempOdCyl].lb, byteData[tempOsCyl].hb, byteData[tempOsCyl].lb]
-  secondHalfOfFullRX = [0x02, 0x00, 0x48, parseInt("0x" + tempOdAxis), parseInt("0x" + tempOsAxis)]
+  sendFullSet();
+}
 
-  masterMarcoPhoropter([firstHalfOfFullRX, secondHalfOfFullRX]);
+function sendFullSet(){
+    tempOdSph = numeral($('.phorButton').eq(3).html()).format("+0.00") * 100;
+    tempOsSph = numeral($('.phorButton').eq(5).html()).format("+0.00") * 100;
+    tempOdCyl = numeral($('.phorButton').eq(6).html()).format("+0.00") * 100;
+    tempOsCyl = numeral($('.phorButton').eq(8).html()).format("+0.00") * 100;
+    tempOdAxis = numeral($('.phorButton').eq(9).html()).format("000");
+    tempOsAxis = numeral($('.phorButton').eq(11).html()).format("000");
+    tempOdAdd = numeral($('.phorButton').eq(12).html()).format("+0.00") * 100;
+    tempOsAdd = numeral($('.phorButton').eq(14).html()).format("+0.00") * 100;
+    firstHalfOfFullRX = [0x08, 0x00, 0x40, byteData[tempOdSph].hb, byteData[tempOdSph].lb, byteData[tempOsSph].hb, byteData[tempOsSph].lb, byteData[tempOdCyl].hb, byteData[tempOdCyl].lb, byteData[tempOsCyl].hb, byteData[tempOsCyl].lb]
+    secondHalfOfFullRX = [0x02, 0x00, 0x48, parseInt("0x" + tempOdAxis), parseInt("0x" + tempOsAxis)]
+
+    masterMarcoPhoropter([firstHalfOfFullRX, secondHalfOfFullRX]);
 }
 
 function buildStaticArrays() {
@@ -1535,3 +1542,5 @@ function resetDevice() {
     [0x01, 0x00, 0x2B, 0x01]
   ])
 }
+
+   

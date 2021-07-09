@@ -418,6 +418,7 @@ $(document).keydown(function(event) {
 
     // jcc controls
     if (event.which == 101) {
+      if(addMode == false){
       //5
       //toggle jcc on correct eye
       var jccCurStat = jccStatus == 1 ? "XC1" : (jccCurStat = "XC2");
@@ -504,6 +505,7 @@ $(document).keydown(function(event) {
         sendData(["XC0"]);
       }
     }
+    }
 
     if (event.which == 110) {
       addMode = !addMode;
@@ -513,11 +515,13 @@ $(document).keydown(function(event) {
         $("#addRow").addClass("cross-cylinder-select");
         odAdd = numeral(parseFloat($(phorButtons[12]).html()) + parseFloat($(phorButtons[3]).html())).format("+00.00");
         osAdd = numeral(parseFloat($(phorButtons[14]).html()) + parseFloat($(phorButtons[5]).html())).format("+00.00");
+        sendData(["NL1"])
         sendData(["RS" + odAdd, "LS" + osAdd])
       } else {
         $("#addRow").removeClass("cross-cylinder-select");
         odAdd = numeral(parseFloat($(phorButtons[3]).html())).format('+00.00');
         osAdd = numeral(parseFloat($(phorButtons[5]).html())).format("+00.00");
+        sendData(["NL0"])
         sendData(["RS" + odAdd, "LS" + osAdd])
       }
 
@@ -857,6 +861,7 @@ function finalSend() {
   emrArray[42] = refInfo.ar15 == null ? "\t\t" : refInfo.ar15 + "\t";
   emrArray[43] = "*!";
 
+    sendData(["NL0"])
 
   ipc.send('finalRx', emrArray)
   // $.ajax({

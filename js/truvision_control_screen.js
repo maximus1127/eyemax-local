@@ -26,55 +26,55 @@ var currentLine;
 ipc.on('vision-changed', (e, data) => {
     console.log(data)
     switch (data.size) {
-        case "10":
+        case 10:
             currentLine = 14;
             break;
-        case "15":
+        case 15:
             currentLine = 13;
             break;
-        case "20":
+        case 20:
             currentLine = 12;
             break;
-        case "25":
+        case 25:
             currentLine = 11;
             break;
-        case "30":
+        case 30:
             currentLine = 10;
             break;
-        case "40":
+        case 40:
             currentLine = 9;
             break;
-        case "50":
+        case 50:
             currentLine = 8;
             break;
-        case "60":
+        case 60:
             currentLine = 7;
             break;
-        case "70":
+        case 70:
             currentLine = 6;
             break;
-        case "80":
+        case 80:
             currentLine = 5;
             break;
-        case "100":
+        case 100:
             currentLine = 4;
             break;
-        case "200":
+        case 200:
             currentLine = 3;
             break;
-        case "300":
+        case 300:
             currentLine = 2;
             break;
-        case "400":
+        case 400:
             currentLine = 1;
             break;
-        case "400200":
+        case 400200:
             currentLine = 15;
             break;
-        case "1008070":
+        case 1008070:
             currentLine = 16;
             break;
-        case "605040":
+        case 605040:
             currentLine = 17;
             break;
         case 302520:
@@ -1453,11 +1453,13 @@ $("html").on("keydown", function (event) {
     //     $("#hotv").trigger("click");
     // }
     if (event.which == 38) {
+        console.log(currentLine)
         if (!$("#colorPlates").hasClass("modeButtonActive")) {
             event.preventDefault();
             if (currentLine > 1) {
                 currentLine--;
             }
+            console.log(currentLine)
             $("button[data-clicker='" + currentLine + "']").trigger("click");
         }
     }

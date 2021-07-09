@@ -138,6 +138,7 @@ function autorefractorModal() {
             osar = result["MarcoData-XML"]['DataSet'][0]["RM_Data_OS"][0] ?? null
             odak = result["MarcoData-XML"]['DataSet'][0]["KM_Data_OD"][0] ?? null
             osak = result["MarcoData-XML"]['DataSet'][0]["KM_Data_OS"][0] ?? null
+            pd = result['MarcoData-XML']['DataSet'][0]['RM_Data_OU'][0]['PD'][0]
             // if (oslm || odlm) {
 
             available_ars[file].la01 = odlm['Sphere_OD'][0].replace(' ', '')
@@ -150,7 +151,7 @@ function autorefractorModal() {
             available_ars[file].la08 = oslm['Add_OS'][0].replace(' ', '')
             // }
             // if (osar || odar) {
-
+            available_ars[file].ar01 = pd
             available_ars[file].ar02 = odar['Sphere_OD'][0].replace(' ', '')
             available_ars[file].ar03 = odar['Cylinder_OD'][0].replace(' ', '')
             available_ars[file].ar04 = odar['Axis_OD'][0].replace(' ', '')
@@ -291,6 +292,22 @@ function enterManualAr() {
     $("#autorefractorBody").append(`
       <tr class="manualAr">
         <td></td>
+        <td>PD: <select id="pd">
+        <option value="59">59</option>
+        < option value = "59" > 59 < /option>
+        < option value = "60" > 60 < /option>
+        < option value = "61" > 61 < /option>
+        < option value = "62" > 62 < /option>
+        < option value = "63" > 63 < /option>
+        < option value = "64" selected> 64 < /option>
+        < option value = "65" > 65 < /option>
+        < option value = "66" > 66 < /option>
+        < option value = "67" > 67 < /option>
+        < option value = "68" > 68 < /option>
+        < option value = "69" > 69 < /option>
+        < option value = "70" > 70 < /option>
+        < option value = "71" > 71 < /option>        
+        </select></td>
         <td>
           OD: ${sphereSelect("manual_ar_sphere_od")} -${cylSelect(
             "manual_ar_cyl_od"

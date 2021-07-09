@@ -8,7 +8,9 @@
   <meta name="author" content="">
 
   <title>Truvision Acuity</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" />
   <link href="../css/truvision_controller.css" rel="stylesheet" />
+  <link href="../css/fontawesome.css" rel="stylesheet" />
   <style>
     .vision-div {
       border: 2px solid #810815;
@@ -20,10 +22,14 @@
       background-color: gray;
       font-family: Arial, Helvetica, sans-serif;
     }
+
+
+  
   </style>
 </head>
 
-<body class="container" onload="initialTrigger()">
+<body onload="initialTrigger()">
+  <div style="margin-top: 70px"></div>
   <!-- <div class="dropdown">
 		<button class="dropbtn">Calibrate</button>
 		<div class="dropdown-content">
@@ -33,9 +39,9 @@
 			<button class="singleButtons" data-size = "reset" id="reset">Reset</button>
 		</div>
 	</div> -->
-
-  <div id="vision_controls" class="col-6">
-    <div class="row justify-content-center gutter margin-top">
+<div class="row">
+  <div id="vision_controls" class="col-6" style="margin-right: -30px;">
+    <div class="row ">
       <div class="logobackground">
         <div class="modeHolder">
           <div class="row justify-content-center">
@@ -108,15 +114,15 @@
 
             <div class="row justify-content-center">
               <button class="modeButton singleButtons" data-clicker="15" id="groupOne" data-size="400200"
-                style="border: 5px solid #810815">400/200 <br /> (D)</button>
+                style="border: 2px solid #810815;">400/200 <br /> (D)</button>
               <button class="modeButton singleButtons" data-clicker="16" id="groupTwo" data-size="1008070"
-                style="border: 5px solid #810815">100/80/70 <br /> (F)</button>
+                style="border: 2px solid #810815">100/80/70 <br /> (F)</button>
               <button class="modeButton singleButtons" data-clicker="17" id="groupThree" data-size="605040"
-                style="border: 5px solid #810815">60/50/40 <br /> (G)</button>
+                style="border: 2px solid #810815">60/50/40 <br /> (G)</button>
               <button class="modeButton singleButtons" data-clicker="18" id="groupFour" data-size="302520"
-                style="border: 5px solid #810815">30/25/20 <br /> (H)</button>
+                style="border: 2px solid #810815">30/25/20 <br /> (H)</button>
               <button class="modeButton singleButtons" data-clicker="19" id="groupSix" data-size="6020"
-                style="border: 5px solid #810815">60-20 <br /> (J)</button>
+                style="border: 2px solid #810815">60-20 <br /> (J)</button>
             </div>
 
           </div>
@@ -155,7 +161,7 @@
 
 
 
-  <div id="phoropter_controls" class="col-6">
+  <div id="phoropter_controls" class="col-6" style="margin-left: -50px;">
     <div class="row justify-content-center gutter margin-top">
       <div class="logobackground" style="width: 100%">
         <div class="phorModeHolder" style="position: relative">
@@ -181,7 +187,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="ref-data ref-data-active" id="subjRx" style="line-height: 10px;">
-              <label><u>Subjective</u></label>
+              <label style="margin-bottom: 15px;"><u>Subjective</u></label>
               <p><span class="odSphere" id="subjOdSph">
                   <!-- odsph-->
                 </span><span class="odCyl" id="subjOdCyl">
@@ -210,24 +216,30 @@
 
         <br />
 
-        <div class="modeHolder row justify-content-center">
-          <div class="col-4 jcc">
+        <div class="lineHolder row justify-content-center">
+          <button class="activateJcc" id="activateJcc" onclick="sendKeyPress('num5')">JCC</button>
+          <button class="activatePrism" id="activatePrism" data-toggle="modal" data-target="#prismModal">Pri</button>
+          <div class="col-3 jcc">
             <div id="jccODText"></div>
-            <div class="row justify-content-center jccHolder">
-              <img src="../images/jccOD.png" width="108px;" id="jccOD" />
+            <div class="row jccHolder" >
+              <img src="../images/jccOD.png"  id="jccOD" onclick="sendKeyPress('num8')" style="cursor:pointer" />
             </div>
           </div>
-          <div id="sizeHolder" class="col-4">
+          <div id="sizeHolder" class="col-6">
             <div class="row justify-content-center" style="border-bottom: 3px solid #810815;">
-              <button class="phorButton odButtons" disabled id="odSelect">OD <br> Del</button>
-              <button class="phorButton ouButtons" disabled id="ouSelect">OU <br> End</button>
-              <button class="phorButton osButtons" disabled id="osSelect">OS <br> Pg Dwn</button>
+              <button class="phorButton odButtons" onclick="sendKeyPress('Delete')" id="odSelect">OD <br> Del</button>
+              <button class="phorButton ouButtons" onclick="sendKeyPress('End')" id="ouSelect">OU <br> End</button>
+              <button class="phorButton osButtons" onclick="sendKeyPress('PageDown')" id="osSelect">OS <br> Pg Dwn</button>
             </div>
             <div class="row justify-content-center">
               <button class="phorButton odButtons odSphere" disabled data-prefix="RS" id="odSphButton">
                 <!-- odsph-->
               </button>
-              <button class="phorButton ouButtons" disabled>Sphere<br />(7) - 0 + (9)</button>
+              <i class="far fa-minus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('num7')"></i>
+              <button class="phorButton ouButtons" disabled>Sphere<br />(7) - 0 + (9)</button><i
+                class="far fa-plus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('num9')"></i>
               <button class="phorButton osButtons osSphere" disabled data-prefix="LS" id="osSphButton">
                 <!-- ossph-->
               </button>
@@ -236,40 +248,78 @@
               <button class="phorButton odButtons odCyl" disabled data-prefix="RC" id="odCylButton">
                 <!-- odcyl-->
               </button>
+              <i class="far fa-minus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('num4')"></i>
               <button class="phorButton ouButtons" disabled>Cyl <br />(4) - 0 + (6)</button>
+              <i class="far fa-plus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('num6')"></i>
               <button class="phorButton osButtons osCyl" disabled data-prefix="LC" id="osCylButton">
                 <!-- oscyl-->
               </button>
             </div>
             <div class="row justify-content-center" id="axisRow">
+         
               <button class="phorButton odButtons odAxis" disabled data-prefix="RA" id="odAxisButton">
                 <!-- odax-->
               </button>
+              <i class="far fa-minus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('num1')"></i>
               <button class="phorButton ouButtons" disabled>Axis <br />(1) - 0 + (3)</button>
-              <button class="phorButton osButtons osAxis" disabled data-prefix="LA" id="osAxisButton">
+              <i class="far fa-plus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('num3')"></i>
+              <button class=" phorButton osButtons osAxis" disabled data-prefix="LA" id="osAxisButton">
                 <!-- osax-->
               </button>
+           
             </div>
             <div class="row justify-content-center" id="addRow">
-              <button class="phorButton odButtons odAdd" disabled data-prefix="RD" id="odAddButton">
+              <button class="phorButton odButtons odAdd" disabled data-prefix="RD"
+                id="odAddButton">
                 <!--odadd-->
               </button>
-              <button class="phorButton ouButtons" disabled>Add <br />(-) - 0 + (+)</button>
+              <i class="far fa-minus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('numsub')"></i>
+              <button class="phorButton ouButtons" onclick="sendKeyPress('numdec')">Add <br />(-) - 0 + (+)</button>
+              <i class="far fa-plus-square fa-2x" style="color: #fff; cursor: pointer;"
+                onclick="sendKeyPress('numadd')"></i>
               <button class="phorButton osButtons osAdd" disabled data-prefix="LD" id="osAddButton">
                 <!--osadd-->
               </button>
             </div>
           </div>
-          <div class="col-4 jcc">
+          <div class="col-3 jcc">
             <div id="jccOSText"></div>
             <div class="row justify-content-center jccHolder">
-              <img src="../images/jccOD.png" width="108px;" id="jccOS" />
+              <img src="../images/jccOD.png" id="jccOS" onclick="sendKeyPress('num8')"
+                style="cursor:pointer" />
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="prismModal" tabindex="-1" role="dialog" aria-labelledby="prismModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content phorModeHolder">
+            <div class="modal-header">
+                <h5 class="modal-title" id="prismModalLabel" style="color:white">Prism</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-6 col-sm-6"></div>
+                <div class="col-md-6 col-sm-6"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
 
 
 
@@ -282,6 +332,7 @@
     const Store = require('electron-store');
     const store = new Store();
     const vx55 = require('../phoropter_functions/vx_send_calc.js')
+    
     ipc.send('getGlobalPeripheral')
 
     ipc.on('globalRequestResponse', (d, data) => {
@@ -323,6 +374,10 @@
 
     })
 
+    function sendKeyPress(id) {
+     ipc.send('sendKeyPress', id)
+    }
+
     // <p><span class="odSphere" id="subjOdSph">
     //     <!-- odsph-->
     //   </span><span class="odCyl" id="subjOdCyl">
@@ -335,11 +390,18 @@
     //   </span><span class="osCyl" id="subjOsCyl">
     //     <!-- oscyl-->
     //   </span> x <span class="osAxis" id="subjOsAxis">
+
+      function activatePrism(){
+
+      }
   </script>
 
   <!-- <script src="../js/phoropter-socket-responses.js"></script>
   <script type="text/javascript" src="../js/marco_phoropter.js"></script> -->
   <script type="text/javascript" src="../js/truvision_control_screen.js"></script>
+  <script type="text/javascript" src="../js/fontawesome.js"></script>
+   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
 
 
 </body>
